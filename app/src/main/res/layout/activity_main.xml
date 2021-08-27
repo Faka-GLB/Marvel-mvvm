@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/image_app_background"
-    android:backgroundTint="@color/smalt_blue"
+    android:backgroundTint="@color/smalt_blue_layout_background_tint_main_activity"
     android:backgroundTintMode="src_atop"
     tools:context=".activity.MainActivity">
 
@@ -32,7 +32,7 @@
         style="@style/TextStyleMainActivityButtonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/cod_gray"
+        android:backgroundTint="@color/cod_gray_get_button_main_activity"
         android:text="@string/main_activity_button_get"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
