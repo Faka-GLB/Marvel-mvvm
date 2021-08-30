@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_activity_title_text_size_xbig">35sp</dimen>
+    <dimen name="main_activity_margin_size_small">20dp</dimen>
+    <dimen name="main_activity_body_text_size_big">25sp</dimen>
+</resources>
