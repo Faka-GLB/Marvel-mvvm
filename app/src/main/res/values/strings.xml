@@ -2,4 +2,6 @@
     <string name="app_name">Jarvis Searcher</string>
     <string name="main_activity_text_view_greeting_message">Welcome to the stark heroes database, please select get to start</string>
     <string name="main_activity_button_get">Get</string>
+    <string name="main_activity_toast_get_characters">Found %1$d characters</string>
+    <string name="main_activity_toast_get_characters_error">Error, please try again</string>
 </resources>
