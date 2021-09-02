@@ -8,5 +8,6 @@
     <dimen name="item_character_card_view_corner_radius">30dp</dimen>
     <dimen name="item_character_card_view_max_elevation">12dp</dimen>
     <dimen name="main_activity_padding_size_small">20dp</dimen>
-    <dimen name="main_activity_recycler_view_height">600dp</dimen>
+    <dimen name="item_character_image_view_height">150dp</dimen>
+    <dimen name="item_character_image_view_width">100dp</dimen>
 </resources>

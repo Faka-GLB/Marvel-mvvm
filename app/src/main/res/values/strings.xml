@@ -4,4 +4,6 @@
     <string name="main_activity_button_get">Get</string>
     <string name="main_activity_toast_get_characters">Found %1$d characters</string>
     <string name="main_activity_toast_get_characters_error">Error, please try again</string>
+    <string name="item_character_image_view_description">%1$s</string>
+    <string name="main_activity_character_thumbnail_url">%1$s/portrait_medium.%2$s</string>
 </resources>

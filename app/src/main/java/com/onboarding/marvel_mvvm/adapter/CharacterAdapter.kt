@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.onboarding.domain.entity.MarvelCharacter
 import com.onboarding.marvel_mvvm.R
 import com.onboarding.marvel_mvvm.databinding.ItemCharacterBinding
@@ -26,7 +27,17 @@ class CharacterAdapter(private val characterItems: List<MarvelCharacter>):  Recy
         fun bind(character: MarvelCharacter) {
             with(ItemCharacterBinding.bind(itemView)) {
                 textViewItemCharacterName.text = character.name
+                Glide.with(itemView.context)
+                    .load(String.format(
+                        URL_FORMAT,
+                        character.thumbnail.path,
+                        character.thumbnail.extension
+                    ))
+                    .into(imageViewItemCharacterThumbnail)
             }
         }
+    }
+    companion object{
+            private const val URL_FORMAT = "%s/portrait_medium.%s"
     }
 }

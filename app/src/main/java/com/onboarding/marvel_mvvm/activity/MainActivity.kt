@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttonMainActivityGetInfo.visibility = View.GONE
         binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.VISIBLE
+        binding.textViewMainActivityTitle.visibility = View.GONE
     }
 
     private fun errorState() {
