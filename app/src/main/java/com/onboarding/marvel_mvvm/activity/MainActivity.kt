@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.onboarding.domain.entity.MarvelCharacter
 import com.onboarding.domain.entity.MarvelData
 import com.onboarding.marvel_mvvm.R
+import com.onboarding.marvel_mvvm.adapter.CharacterAdapter
 import com.onboarding.marvel_mvvm.databinding.ActivityMainBinding
 import com.onboarding.marvel_mvvm.utils.Event
 import com.onboarding.marvel_mvvm.viewmodel.Data
@@ -28,9 +31,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val updateUIObserver = Observer<Event<Data<MarvelData>>> { event ->
-        when (event?.getContentIfNotHandled()?.responseType) {
+        when (event?.peekContent()?.responseType) {
             Status.SUCCESSFUL -> {
-                event.peekContent().data?.total?.let { successState(it) }
+                event.getContentIfNotHandled()?.data?.character?.let { successState(it) }
             }
             Status.ERROR -> {
                 errorState()
@@ -42,27 +45,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadingState() {
-        binding.buttonMainActivityGetInfo.visibility = View.INVISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.INVISIBLE
+        binding.buttonMainActivityGetInfo.visibility = View.GONE
+        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
         binding.progressBarMainActivity.visibility = View.VISIBLE
+        binding.recyclerViewMainActivity.visibility = View.INVISIBLE
     }
 
-    private fun successState(response: Int) {
-        binding.buttonMainActivityGetInfo.visibility = View.VISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
+    private fun successState(response: List<MarvelCharacter>) {
         binding.progressBarMainActivity.visibility = View.GONE
-        makeToast(message = getString(R.string.main_activity_toast_get_characters, response), Toast.LENGTH_LONG)
+        binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerViewMainActivity.adapter = CharacterAdapter(response)
+        binding.buttonMainActivityGetInfo.visibility = View.GONE
+        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
+        binding.recyclerViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun errorState() {
         binding.buttonMainActivityGetInfo.visibility = View.VISIBLE
         binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
         binding.progressBarMainActivity.visibility = View.GONE
-        makeToast(message = getString(R.string.main_activity_toast_get_characters_error), Toast.LENGTH_SHORT)
-    }
-
-    private fun makeToast(message: String, length: Int) {
-        Toast.makeText(this, message, length).show()
+        binding.recyclerViewMainActivity.visibility = View.INVISIBLE
+        Toast.makeText(this, getString(R.string.main_activity_toast_get_characters_error), Toast.LENGTH_SHORT).show()
     }
 
     private fun onGetButtonPressed() {

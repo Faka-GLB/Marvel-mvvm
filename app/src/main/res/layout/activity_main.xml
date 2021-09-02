@@ -44,4 +44,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_main_activity"
+        style="@style/RecyclerViewStyleMainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_activity_recycler_view_height"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_main_activity_title"
+        tools:listitem="@layout/item_character" />
 </androidx.constraintlayout.widget.ConstraintLayout>

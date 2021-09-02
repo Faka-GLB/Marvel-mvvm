@@ -3,4 +3,10 @@
     <dimen name="main_activity_title_text_size_xbig">35sp</dimen>
     <dimen name="main_activity_margin_size_small">20dp</dimen>
     <dimen name="main_activity_body_text_size_big">25sp</dimen>
+    <dimen name="main_activity_margin_size_normal">30dp</dimen>
+    <dimen name="item_character_card_view_elevation">10dp</dimen>
+    <dimen name="item_character_card_view_corner_radius">30dp</dimen>
+    <dimen name="item_character_card_view_max_elevation">12dp</dimen>
+    <dimen name="main_activity_padding_size_small">20dp</dimen>
+    <dimen name="main_activity_recycler_view_height">600dp</dimen>
 </resources>
