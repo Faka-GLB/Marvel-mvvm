@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Jarvis Searcher</string>
-    <string name="main_activity_text_view_greeting_message">Welcome to the stark heroes database, please select get to start</string>
-    <string name="main_activity_button_get">Get</string>
+    <string name="main_activity_text_view_greeting_message">Welcome to the stark heroes database, please wait</string>
+    <string name="main_activity_button_try_again">Try again</string>
     <string name="main_activity_toast_get_characters">Found %1$d characters</string>
     <string name="main_activity_toast_get_characters_error">Error, please try again</string>
+    <string name="item_character_image_view_description">%1$s</string>
+    <string name="main_activity_character_thumbnail_url">%1$s/portrait_medium.%2$s</string>
+    <string name="main_activity_toast_empty_list_state">Error: characters not found</string>
 </resources>
