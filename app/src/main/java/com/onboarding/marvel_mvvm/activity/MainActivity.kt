@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getLiveDataCharacters().observe(this, updateUIObserver)
         setListener()
+        viewModel.getCharacters()
     }
 
     private val updateUIObserver = Observer<Event<Data<MarvelData>>> { event ->
@@ -45,35 +46,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadingState() {
-        binding.buttonMainActivityGetInfo.visibility = View.GONE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
+        binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
         binding.progressBarMainActivity.visibility = View.VISIBLE
         binding.recyclerViewMainActivity.visibility = View.INVISIBLE
+        binding.buttonMainActivityTryAgain.visibility = View.GONE
     }
 
     private fun successState(response: List<MarvelCharacter>) {
-        binding.progressBarMainActivity.visibility = View.GONE
         binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewMainActivity.adapter = CharacterAdapter(response)
-        binding.buttonMainActivityGetInfo.visibility = View.GONE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
-        binding.recyclerViewMainActivity.visibility = View.VISIBLE
         binding.textViewMainActivityTitle.visibility = View.GONE
+        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
+        binding.buttonMainActivityTryAgain.visibility = View.GONE
+        binding.progressBarMainActivity.visibility = View.GONE
+        binding.recyclerViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun errorState() {
-        binding.buttonMainActivityGetInfo.visibility = View.VISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
         binding.progressBarMainActivity.visibility = View.GONE
+        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.INVISIBLE
+        binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
         Toast.makeText(this, getString(R.string.main_activity_toast_get_characters_error), Toast.LENGTH_SHORT).show()
     }
 
-    private fun onGetButtonPressed() {
-        viewModel.onGetButtonPressed()
-    }
-
     private fun setListener() {
-        binding.buttonMainActivityGetInfo.setOnClickListener { this.onGetButtonPressed() }
+        binding.buttonMainActivityTryAgain.setOnClickListener { viewModel.getCharacters() }
     }
 }

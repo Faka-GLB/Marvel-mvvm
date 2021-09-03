@@ -18,7 +18,7 @@ class MainViewModel(private val getAllCharacters: GetAllCharactersUseCase) : Vie
 
     fun getLiveDataCharacters() = mutableLiveDataCharacters
 
-    fun onGetButtonPressed() = viewModelScope.launch {
+    fun getCharacters() = viewModelScope.launch {
         mutableLiveDataCharacters.value = Event(Data(responseType = Status.LOADING))
         when (val result = withContext(IO) { getAllCharacters.getCharacters() }) {
             is Result.Success<Base> -> {
