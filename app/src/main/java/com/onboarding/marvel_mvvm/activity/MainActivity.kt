@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadingState() {
-        binding.constraintLayoutBaseScreen.visibility = View.VISIBLE
+        binding.groupBaseView.visibility = View.VISIBLE
         binding.recyclerViewMainActivity.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.GONE
     }
@@ -58,19 +58,19 @@ class MainActivity : AppCompatActivity() {
     private fun successState(response: List<MarvelCharacter>) {
         binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewMainActivity.adapter = CharacterAdapter(response)
-        binding.constraintLayoutBaseScreen.visibility = View.GONE
+        binding.groupBaseView.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun errorState() {
-        binding.constraintLayoutBaseScreen.visibility = View.GONE
+        binding.groupBaseView.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
         showErrorToast(getString(R.string.main_activity_toast_get_characters_error))
     }
 
     private fun emptyListState() {
-        binding.constraintLayoutBaseScreen.visibility = View.GONE
+        binding.groupBaseView.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
         showErrorToast(getString(R.string.main_activity_toast_empty_list_state))
