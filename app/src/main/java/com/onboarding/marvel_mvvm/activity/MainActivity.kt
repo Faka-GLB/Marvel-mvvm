@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
             Status.LOADING -> {
                 loadingState()
             }
+            Status.EMPTY_RESPONSE_LIST -> {
+                emptyListState()
+            }
         }
     }
 
@@ -67,7 +70,20 @@ class MainActivity : AppCompatActivity() {
         binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.INVISIBLE
         binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
-        Toast.makeText(this, getString(R.string.main_activity_toast_get_characters_error), Toast.LENGTH_SHORT).show()
+        showErrorToast(getString(R.string.main_activity_toast_get_characters_error))
+    }
+
+    private fun emptyListState() {
+        binding.progressBarMainActivity.visibility = View.GONE
+        binding.textViewMainActivityTitle.visibility = View.VISIBLE
+        binding.recyclerViewMainActivity.visibility = View.INVISIBLE
+        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
+        binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
+        showErrorToast(getString(R.string.main_activity_toast_empty_list_state))
+    }
+
+    private fun showErrorToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun setListener() {

@@ -22,7 +22,19 @@ class MainViewModel(private val getAllCharacters: GetAllCharactersUseCase) : Vie
         mutableLiveDataCharacters.value = Event(Data(responseType = Status.LOADING))
         when (val result = withContext(IO) { getAllCharacters.getCharacters() }) {
             is Result.Success<Base> -> {
-                mutableLiveDataCharacters.postValue(Event(Data(responseType = Status.SUCCESSFUL, data = result.data.marvelData)))
+                if (result.data.marvelData.character.isNotEmpty()) {
+                    mutableLiveDataCharacters.postValue(Event(Data(responseType = Status.SUCCESSFUL, data = result.data.marvelData)))
+                }
+                else {
+                    mutableLiveDataCharacters.postValue(
+                        Event(
+                            Data(
+                                responseType = Status.EMPTY_RESPONSE_LIST,
+                                data = result.data.marvelData
+                            )
+                        )
+                    )
+                }
             }
             is Result.Failure -> {
                 mutableLiveDataCharacters.postValue(Event(Data(responseType = Status.ERROR, error = result.exception)))
@@ -33,4 +45,4 @@ class MainViewModel(private val getAllCharacters: GetAllCharactersUseCase) : Vie
 
 data class Data<RequestData>(var responseType: Status, var data: RequestData? = null, var error: Exception? = null)
 
-enum class Status { SUCCESSFUL, ERROR, LOADING }
+enum class Status { SUCCESSFUL, ERROR, LOADING, EMPTY_RESPONSE_LIST }
