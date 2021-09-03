@@ -9,35 +9,37 @@ import com.onboarding.domain.entity.MarvelCharacter
 import com.onboarding.marvel_mvvm.R
 import com.onboarding.marvel_mvvm.databinding.ItemCharacterBinding
 
-class CharacterAdapter(private val characterItems: List<MarvelCharacter>):  RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
+class CharacterAdapter(private val characterItems: List<MarvelCharacter>) : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false))
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(characterItems[position])
     }
 
-    override fun getItemCount(): Int {
-        return characterItems.size
-    }
+    override fun getItemCount() = characterItems.size
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(character: MarvelCharacter) {
             with(ItemCharacterBinding.bind(itemView)) {
                 textViewItemCharacterName.text = character.name
                 Glide.with(itemView.context)
-                    .load(String.format(
-                        URL_FORMAT,
-                        character.thumbnail.path,
-                        character.thumbnail.extension
-                    ))
+                    .load(
+                        String.format(
+                            URL_FORMAT,
+                            character.thumbnail.path,
+                            character.thumbnail.extension
+                        )
+                    )
                     .into(imageViewItemCharacterThumbnail)
             }
         }
     }
-    companion object{
-            private const val URL_FORMAT = "%s/portrait_medium.%s"
+
+    companion object {
+        private const val URL_FORMAT = "%s/portrait_medium.%s"
     }
 }

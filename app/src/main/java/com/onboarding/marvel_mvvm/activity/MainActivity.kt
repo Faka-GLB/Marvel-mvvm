@@ -32,9 +32,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val updateUIObserver = Observer<Event<Data<MarvelData>>> { event ->
-        when (event?.peekContent()?.responseType) {
+        val eventData = event.getContentIfNotHandled()
+        when (eventData?.responseType) {
             Status.SUCCESSFUL -> {
-                event.getContentIfNotHandled()?.data?.character?.let { successState(it) }
+                eventData.data?.character?.let { successState(it) }
             }
             Status.ERROR -> {
                 errorState()
@@ -49,35 +50,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadingState() {
-        binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
-        binding.progressBarMainActivity.visibility = View.VISIBLE
-        binding.recyclerViewMainActivity.visibility = View.INVISIBLE
+        binding.constraintLayoutBaseScreen.visibility = View.VISIBLE
+        binding.recyclerViewMainActivity.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.GONE
     }
 
     private fun successState(response: List<MarvelCharacter>) {
         binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewMainActivity.adapter = CharacterAdapter(response)
-        binding.textViewMainActivityTitle.visibility = View.GONE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
+        binding.constraintLayoutBaseScreen.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.GONE
-        binding.progressBarMainActivity.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun errorState() {
-        binding.progressBarMainActivity.visibility = View.GONE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
-        binding.recyclerViewMainActivity.visibility = View.INVISIBLE
+        binding.constraintLayoutBaseScreen.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
         showErrorToast(getString(R.string.main_activity_toast_get_characters_error))
     }
 
     private fun emptyListState() {
-        binding.progressBarMainActivity.visibility = View.GONE
-        binding.textViewMainActivityTitle.visibility = View.VISIBLE
-        binding.recyclerViewMainActivity.visibility = View.INVISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.GONE
+        binding.constraintLayoutBaseScreen.visibility = View.GONE
+        binding.recyclerViewMainActivity.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
         showErrorToast(getString(R.string.main_activity_toast_empty_list_state))
     }
@@ -87,6 +81,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setListener() {
-        binding.buttonMainActivityTryAgain.setOnClickListener { viewModel.getCharacters() }
+        binding.buttonMainActivityTryAgain.setOnClickListener {
+            viewModel.getCharacters()
+            loadingState()
+        }
     }
 }
