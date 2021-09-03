@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.onboarding.domain.entity.MarvelCharacter
 import com.onboarding.domain.entity.MarvelData
 import com.onboarding.marvel_mvvm.R
+import com.onboarding.marvel_mvvm.adapter.CharacterAdapter
 import com.onboarding.marvel_mvvm.databinding.ActivityMainBinding
 import com.onboarding.marvel_mvvm.utils.Event
 import com.onboarding.marvel_mvvm.viewmodel.Data
@@ -25,12 +28,14 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getLiveDataCharacters().observe(this, updateUIObserver)
         setListener()
+        viewModel.getCharacters()
     }
 
     private val updateUIObserver = Observer<Event<Data<MarvelData>>> { event ->
-        when (event?.getContentIfNotHandled()?.responseType) {
+        val eventData = event.getContentIfNotHandled()
+        when (eventData?.responseType) {
             Status.SUCCESSFUL -> {
-                event.peekContent().data?.total?.let { successState(it) }
+                eventData.data?.character?.let { successState(it) }
             }
             Status.ERROR -> {
                 errorState()
@@ -38,38 +43,47 @@ class MainActivity : AppCompatActivity() {
             Status.LOADING -> {
                 loadingState()
             }
+            Status.EMPTY_RESPONSE_LIST -> {
+                emptyListState()
+            }
         }
     }
 
     private fun loadingState() {
-        binding.buttonMainActivityGetInfo.visibility = View.INVISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.INVISIBLE
-        binding.progressBarMainActivity.visibility = View.VISIBLE
+        binding.groupBaseView.visibility = View.VISIBLE
+        binding.recyclerViewMainActivity.visibility = View.GONE
+        binding.buttonMainActivityTryAgain.visibility = View.GONE
     }
 
-    private fun successState(response: Int) {
-        binding.buttonMainActivityGetInfo.visibility = View.VISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
-        binding.progressBarMainActivity.visibility = View.GONE
-        makeToast(message = getString(R.string.main_activity_toast_get_characters, response), Toast.LENGTH_LONG)
+    private fun successState(response: List<MarvelCharacter>) {
+        binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerViewMainActivity.adapter = CharacterAdapter(response)
+        binding.groupBaseView.visibility = View.GONE
+        binding.buttonMainActivityTryAgain.visibility = View.GONE
+        binding.recyclerViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun errorState() {
-        binding.buttonMainActivityGetInfo.visibility = View.VISIBLE
-        binding.textViewMainActivityWelcomeMessage.visibility = View.VISIBLE
-        binding.progressBarMainActivity.visibility = View.GONE
-        makeToast(message = getString(R.string.main_activity_toast_get_characters_error), Toast.LENGTH_SHORT)
+        binding.groupBaseView.visibility = View.GONE
+        binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
+        showErrorToast(getString(R.string.main_activity_toast_get_characters_error))
     }
 
-    private fun makeToast(message: String, length: Int) {
-        Toast.makeText(this, message, length).show()
+    private fun emptyListState() {
+        binding.groupBaseView.visibility = View.GONE
+        binding.recyclerViewMainActivity.visibility = View.GONE
+        binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
+        showErrorToast(getString(R.string.main_activity_toast_empty_list_state))
     }
 
-    private fun onGetButtonPressed() {
-        viewModel.onGetButtonPressed()
+    private fun showErrorToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun setListener() {
-        binding.buttonMainActivityGetInfo.setOnClickListener { this.onGetButtonPressed() }
+        binding.buttonMainActivityTryAgain.setOnClickListener {
+            viewModel.getCharacters()
+            loadingState()
+        }
     }
 }
