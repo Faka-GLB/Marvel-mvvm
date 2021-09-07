@@ -8,12 +8,13 @@ import com.bumptech.glide.Glide
 import com.onboarding.domain.entity.MarvelCharacter
 import com.onboarding.marvel_mvvm.R
 import com.onboarding.marvel_mvvm.databinding.ItemCharacterBinding
+import com.onboarding.marvel_mvvm.listener.CharacterClickListener
 
-class CharacterAdapter(private val characterItems: List<MarvelCharacter>) : RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
+class CharacterAdapter(private val characterItems: List<MarvelCharacter>, private val characterClickListener: CharacterClickListener) :
+    RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false))
-
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false), characterClickListener)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(characterItems[position])
@@ -21,8 +22,7 @@ class CharacterAdapter(private val characterItems: List<MarvelCharacter>) : Recy
 
     override fun getItemCount() = characterItems.size
 
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, private val characterClickListener: CharacterClickListener) : RecyclerView.ViewHolder(itemView) {
         fun bind(character: MarvelCharacter) {
             with(ItemCharacterBinding.bind(itemView)) {
                 textViewItemCharacterName.text = character.name
@@ -35,6 +35,9 @@ class CharacterAdapter(private val characterItems: List<MarvelCharacter>) : Recy
                         )
                     )
                     .into(imageViewItemCharacterThumbnail)
+                itemView.setOnClickListener {
+                    characterClickListener.onCharacterClick(character)
+                }
             }
         }
     }

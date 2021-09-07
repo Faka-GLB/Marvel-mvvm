@@ -12,4 +12,12 @@
     <dimen name="item_character_image_view_width">100dp</dimen>
     <dimen name="item_character_padding_size_xsmall">10dp</dimen>
     <dimen name="main_activity_progress_bar_height">400dp</dimen>
+    <dimen name="character_info_dialog_fragment_margin_size_small">20dp</dimen>
+    <dimen name="character_info_dialog_fragment_padding_size_xsmall">10dp</dimen>
+    <dimen name="character_info_dialog_fragment_description_text_size_normal">12sp</dimen>
+    <dimen name="character_info_dialog_fragment_image_view_height">225dp</dimen>
+    <dimen name="character_info_dialog_fragment_image_view_width">150dp</dimen>
+    <dimen name="character_info_dialog_fragment_margin_size_xsmall">10dp</dimen>
+    <dimen name="character_info_dialog_fragment_scroll_view_width">120dp</dimen>
+    <dimen name="character_info_dialog_fragment_padding_size_xxsmall">5dp</dimen>
 </resources>

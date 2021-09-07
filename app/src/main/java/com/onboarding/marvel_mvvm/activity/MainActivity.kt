@@ -11,13 +11,15 @@ import com.onboarding.domain.entity.MarvelData
 import com.onboarding.marvel_mvvm.R
 import com.onboarding.marvel_mvvm.adapter.CharacterAdapter
 import com.onboarding.marvel_mvvm.databinding.ActivityMainBinding
+import com.onboarding.marvel_mvvm.fragment.CharacterInfoDialogFragment
+import com.onboarding.marvel_mvvm.listener.CharacterClickListener
 import com.onboarding.marvel_mvvm.utils.Event
 import com.onboarding.marvel_mvvm.viewmodel.Data
 import com.onboarding.marvel_mvvm.viewmodel.MainViewModel
 import com.onboarding.marvel_mvvm.viewmodel.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CharacterClickListener {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModel()
 
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun successState(response: List<MarvelCharacter>) {
         binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerViewMainActivity.adapter = CharacterAdapter(response)
+        binding.recyclerViewMainActivity.adapter = CharacterAdapter(response, characterClickListener = this)
         binding.groupBaseView.visibility = View.GONE
         binding.buttonMainActivityTryAgain.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.VISIBLE
@@ -85,5 +87,14 @@ class MainActivity : AppCompatActivity() {
             viewModel.getCharacters()
             loadingState()
         }
+    }
+
+    override fun onCharacterClick(character: MarvelCharacter) {
+        val dialog = CharacterInfoDialogFragment.newInstance(character)
+        dialog.show(this.supportFragmentManager, MAIN_ACTIVITY_TAG)
+    }
+
+    companion object{
+        private const val MAIN_ACTIVITY_TAG = "MainActivity"
     }
 }
