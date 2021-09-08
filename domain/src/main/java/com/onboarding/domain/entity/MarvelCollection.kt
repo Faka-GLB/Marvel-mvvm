@@ -5,4 +5,4 @@ data class MarvelCollection(
     val collection: String,
     val items: List<CollectionItem>,
     val returned: Int
-)
+) : java.io.Serializable

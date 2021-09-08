@@ -7,4 +7,8 @@
     <string name="item_character_image_view_description">%1$s</string>
     <string name="main_activity_character_thumbnail_url">%1$s/portrait_medium.%2$s</string>
     <string name="main_activity_toast_empty_list_state">Error: characters not found</string>
+    <string name="item_comic_front_page_image_view_description">%1$s</string>
+    <string name="character_info_dialog_fragment_return_button_text">Return</string>
+    <string name="main_activity_text_view_character_description_empty">Description not available</string>
+    <string name="character_info_dialog_fragment_text_view_appearances">Comics appearances</string>
 </resources>

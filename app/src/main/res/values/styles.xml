@@ -9,10 +9,10 @@
 
     <style name="TextStyleMainActivityTittle" parent="@style/ShadowedFontMainActivity">
         <item name="android:layout_marginTop">@dimen/main_activity_margin_size_small</item>
-        <item name="android:background">@color/black_title_text_style_main_activity_background</item>
+        <item name="android:background">@color/black_title_text_style_background</item>
         <item name="android:fontFamily">@font/alegreya_sc</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/gulf_blue_title_text_style_main_activity</item>
+        <item name="android:textColor">@color/gulf_blue_title_text_style</item>
         <item name="android:textSize">@dimen/main_activity_title_text_size_xbig</item>
         <item name="android:shadowColor">@color/white</item>
     </style>
@@ -20,20 +20,21 @@
     <style name="TextStyleMainActivityBody" parent="@style/ShadowedFontMainActivity">
         <item name="android:layout_marginTop">@dimen/main_activity_margin_size_small</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/Glacier_body_text_style_main_activity</item>
+        <item name="android:textColor">@color/glacier_body_text_style_main_activity</item>
         <item name="android:textSize">@dimen/main_activity_body_text_size_big</item>
         <item name="android:textStyle">bold</item>
         <item name="android:shadowColor">@color/black</item>
     </style>
 
-    <style name="TextStyleMainActivityButtonText" parent="@style/ShadowedFontMainActivity">
-        <item name="android:textColor">@color/white</item>
+    <style name="TextStyleButtonText" parent="@style/ShadowedFontMainActivity">
+        <item name="android:textColor">@color/black</item>
         <item name="android:shadowColor">@color/black</item>
+        <item name="backgroundColor">@color/glacier_button_background_color</item>
     </style>
 
     <style name="TextStyleItemCharacterText" parent="@style/ShadowedFontMainActivity">
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/Glacier_body_text_style_main_activity</item>
+        <item name="android:textColor">@color/glacier_body_text_style_main_activity</item>
         <item name="android:textSize">@dimen/main_activity_body_text_size_big</item>
         <item name="android:textStyle">bold</item>
         <item name="android:shadowColor">@color/black</item>
@@ -43,5 +44,32 @@
         <item name="android:layout_marginTop">@dimen/main_activity_margin_size_normal</item>
         <item name="android:layout_marginBottom">@dimen/main_activity_margin_size_normal</item>
         <item name="android:padding">@dimen/main_activity_padding_size_small</item>
+    </style>
+
+    <style name="TextStyleCharacterInfoDialogFragmentDescriptionName" parent="@style/ShadowedFontMainActivity">
+        <item name="android:background">@color/black_title_text_style_background</item>
+        <item name="android:fontFamily">@font/alegreya_sc</item>
+        <item name="android:layout_marginStart">@dimen/character_info_dialog_fragment_margin_size_small</item>
+        <item name="android:titleMarginBottom">@dimen/character_info_dialog_fragment_margin_size_small</item>
+        <item name="android:textColor">@color/gulf_blue_title_text_style</item>
+        <item name="android:textSize">@dimen/main_activity_title_text_size_xbig</item>
+        <item name="android:shadowColor">@color/white</item>
+    </style>
+
+    <style name="TextStyleCharacterInfoDialogFragmentDescriptionText" parent="@style/ShadowedFontMainActivity">
+        <item name="android:layout_marginTop">@dimen/main_activity_margin_size_small</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/gulf_blue_title_text_style</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:textSize">@dimen/character_info_dialog_fragment_description_text_size_normal</item>
+        <item name="android:shadowColor">@color/black</item>
+    </style>
+
+    <style name="RecyclerViewStyleCharacterInfoDialogFragment">
+        <item name="android:layout_marginTop">@dimen/character_info_dialog_fragment_margin_size_xsmall</item>
+        <item name="android:padding">@dimen/character_info_dialog_fragment_padding_size_xsmall</item>
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">true</item>
+        <item name="android:scrollbarFadeDuration">@integer/material_motion_duration_long_2</item>
+        <item name="android:scrollbars">horizontal</item>
     </style>
 </resources>

@@ -12,4 +12,4 @@ data class MarvelCharacter(
     val stories: MarvelCollection,
     val events: MarvelCollection,
     val urls: List<Urls>
-)
+) : java.io.Serializable

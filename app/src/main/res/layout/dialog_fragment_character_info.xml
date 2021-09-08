@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/character_info_dialog_fragment_padding_size_xxsmall"
+    android:background="@color/smalt_blue_character_info_dialog_fragment_background">
+
+    <TextView
+        android:id="@+id/text_view_character_info_dialog_fragment_name"
+        style="@style/TextStyleCharacterInfoDialogFragmentDescriptionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_view_character_info_dialog_fragment_thumbnail"
+        android:layout_width="@dimen/character_info_dialog_fragment_image_view_width"
+        android:layout_height="@dimen/character_info_dialog_fragment_image_view_height"
+        android:layout_marginStart="@dimen/character_info_dialog_fragment_margin_size_xsmall"
+        android:layout_marginTop="@dimen/character_info_dialog_fragment_margin_size_small"
+        android:layout_marginEnd="@dimen/character_info_dialog_fragment_margin_size_small"
+        android:contentDescription="@string/item_comic_front_page_image_view_description"
+        app:layout_constraintBottom_toTopOf="@id/text_view_character_info_dialog_fragment_comics_appearances"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_character_info_dialog_fragment_name" />
+
+    <ScrollView
+        android:layout_width="@dimen/character_info_dialog_fragment_scroll_view_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/image_view_character_info_dialog_fragment_thumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_view_character_info_dialog_fragment_thumbnail"
+        app:layout_constraintTop_toTopOf="@id/image_view_character_info_dialog_fragment_thumbnail">
+
+        <TextView
+            android:id="@+id/text_view_character_info_dialog_fragment_description"
+            style="@style/TextStyleCharacterInfoDialogFragmentDescriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:forceHasOverlappingRendering="false" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/text_view_character_info_dialog_fragment_comics_appearances"
+        style="@style/TextStyleCharacterInfoDialogFragmentDescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/character_info_dialog_fragment_margin_size_small"
+        android:text="@string/character_info_dialog_fragment_text_view_appearances"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_character_info_dialog_fragment"
+        app:layout_constraintTop_toBottomOf="@id/image_view_character_info_dialog_fragment_thumbnail" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_character_info_dialog_fragment"
+        style="@style/RecyclerViewStyleCharacterInfoDialogFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_view_character_info_dialog_fragment_comics_appearances"
+        tools:listitem="@layout/item_comic_name" />
+
+    <Button
+        android:id="@+id/button_character_info_dialog_fragment_return"
+        style="@style/TextStyleButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/character_info_dialog_fragment_return_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view_character_info_dialog_fragment" />
+</androidx.constraintlayout.widget.ConstraintLayout>

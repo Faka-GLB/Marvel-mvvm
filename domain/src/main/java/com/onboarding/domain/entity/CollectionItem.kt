@@ -4,4 +4,4 @@ data class CollectionItem(
     val resourceURI: String,
     val name: String,
     val type: String
-)
+) : java.io.Serializable
