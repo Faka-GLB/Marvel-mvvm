@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onboarding.domain.entity.MarvelCharacter
-import com.onboarding.domain.entity.MarvelData
 import com.onboarding.marvel_mvvm.R
 import com.onboarding.marvel_mvvm.adapter.CharacterAdapter
 import com.onboarding.marvel_mvvm.databinding.ActivityMainBinding
@@ -33,11 +32,11 @@ class MainActivity : AppCompatActivity(), CharacterClickListener {
         viewModel.getCharacters()
     }
 
-    private val updateUIObserver = Observer<Event<Data<MarvelData>>> { event ->
+    private val updateUIObserver = Observer<Event<Data<List<MarvelCharacter>>>> { event ->
         val eventData = event.getContentIfNotHandled()
         when (eventData?.responseType) {
             Status.SUCCESSFUL -> {
-                eventData.data?.character?.let { successState(it) }
+                eventData.data?.let { successState(it) }
             }
             Status.ERROR -> {
                 errorState()
@@ -94,7 +93,7 @@ class MainActivity : AppCompatActivity(), CharacterClickListener {
         dialog.show(this.supportFragmentManager, MAIN_ACTIVITY_TAG)
     }
 
-    companion object{
+    companion object {
         private const val MAIN_ACTIVITY_TAG = "MainActivity"
     }
 }

@@ -8,7 +8,7 @@ import com.onboarding.domain.entity.Base
 import com.onboarding.domain.usecase.MarvelRepository
 import com.onboarding.domain.util.Result
 
-class MarvelRepositoryImpl : MarvelRepository {
+class MarvelRepositoryImpl() : MarvelRepository {
     private val generator = MarvelRequestGenerator()
     override fun getCharacterInfo(): Result<Base> {
         val callResponse = generator.createService(MarvelApi::class.java)
@@ -18,7 +18,7 @@ class MarvelRepositoryImpl : MarvelRepository {
             response.body()?.let {
                 return Result.Success(it.transform())
             }
-        } catch  (e:Exception) {
+        } catch (e: Exception) {
             return Result.Failure(Exception(EXCEPTION_MESSAGE))
         }
         return Result.Failure(Exception(EXCEPTION_MESSAGE))
