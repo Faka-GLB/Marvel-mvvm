@@ -14,44 +14,31 @@
         style="@style/TextStyleMainActivityTittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_view_main_activity_welcome_message"
         style="@style/TextStyleMainActivityBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_view_main_activity_title"
+        android:text="@string/main_activity_text_view_greeting_message"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/main_activity_text_view_greeting_message" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_main_activity_title" />
 
     <ProgressBar
         android:id="@+id/progress_bar_main_activity"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_activity_progress_bar_height"
-        app:layout_constraintTop_toBottomOf="@id/text_view_main_activity_welcome_message"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_main_activity_welcome_message" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_base_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="text_view_main_activity_title,text_view_main_activity_welcome_message,progress_bar_main_activity" />
-
-    <Button
-        android:id="@+id/button_main_activity_try_again"
-        style="@style/TextStyleButtonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/cod_gray_get_button_main_activity"
-        android:text="@string/main_activity_button_try_again"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:constraint_referenced_ids="text_view_main_activity_title,text_view_main_activity_welcome_message" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main_activity"
@@ -62,4 +49,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_character" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button_main_activity_remote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/main_activity_margin_size_small"
+        android:contentDescription="@string/main_activity_floating_action_button_remote_description"
+        android:src="@drawable/image_main_activity_floating_action_button_remote"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button_main_activity_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/main_activity_margin_size_small"
+        android:contentDescription="@string/main_activity_floating_action_button_local_description"
+        android:src="@drawable/image_main_activity_floating_action_button_local"
+        app:layout_constraintBottom_toTopOf="@id/floating_action_button_main_activity_remote"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

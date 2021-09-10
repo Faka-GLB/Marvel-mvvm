@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity(), CharacterClickListener {
         setContentView(binding.root)
 
         viewModel.getLiveDataCharacters().observe(this, updateUIObserver)
-        setListener()
-        viewModel.getCharacters()
+        setListeners()
     }
 
     private val updateUIObserver = Observer<Event<Data<List<MarvelCharacter>>>> { event ->
@@ -51,29 +50,35 @@ class MainActivity : AppCompatActivity(), CharacterClickListener {
     }
 
     private fun loadingState() {
-        binding.groupBaseView.visibility = View.VISIBLE
+        binding.groupBaseView.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.GONE
-        binding.buttonMainActivityTryAgain.visibility = View.GONE
+        binding.progressBarMainActivity.visibility = View.VISIBLE
+        binding.floatingActionButtonMainActivityLocal.hide()
+        binding.floatingActionButtonMainActivityRemote.hide()
     }
 
     private fun successState(response: List<MarvelCharacter>) {
         binding.recyclerViewMainActivity.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewMainActivity.adapter = CharacterAdapter(response, characterClickListener = this)
         binding.groupBaseView.visibility = View.GONE
-        binding.buttonMainActivityTryAgain.visibility = View.GONE
+        binding.progressBarMainActivity.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun errorState() {
-        binding.groupBaseView.visibility = View.GONE
-        binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
+        binding.groupBaseView.visibility = View.VISIBLE
+        binding.progressBarMainActivity.visibility = View.GONE
+        binding.floatingActionButtonMainActivityLocal.show()
+        binding.floatingActionButtonMainActivityRemote.show()
         showErrorToast(getString(R.string.main_activity_toast_get_characters_error))
     }
 
     private fun emptyListState() {
-        binding.groupBaseView.visibility = View.GONE
+        binding.groupBaseView.visibility = View.VISIBLE
+        binding.progressBarMainActivity.visibility = View.GONE
         binding.recyclerViewMainActivity.visibility = View.GONE
-        binding.buttonMainActivityTryAgain.visibility = View.VISIBLE
+        binding.floatingActionButtonMainActivityLocal.show()
+        binding.floatingActionButtonMainActivityRemote.show()
         showErrorToast(getString(R.string.main_activity_toast_empty_list_state))
     }
 
@@ -81,10 +86,12 @@ class MainActivity : AppCompatActivity(), CharacterClickListener {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun setListener() {
-        binding.buttonMainActivityTryAgain.setOnClickListener {
-            viewModel.getCharacters()
-            loadingState()
+    private fun setListeners() {
+        binding.floatingActionButtonMainActivityRemote.setOnClickListener {
+            viewModel.getCharacters(fromRemote = true)
+        }
+        binding.floatingActionButtonMainActivityLocal.setOnClickListener {
+            viewModel.getCharacters(fromRemote = false)
         }
     }
 

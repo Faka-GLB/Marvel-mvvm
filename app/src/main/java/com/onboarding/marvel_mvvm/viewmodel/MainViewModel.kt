@@ -17,9 +17,9 @@ class MainViewModel(private val getAllCharacters: GetAllCharactersUseCase) : Vie
 
     fun getLiveDataCharacters() = mutableLiveDataCharacters
 
-    fun getCharacters() = viewModelScope.launch {
+    fun getCharacters(fromRemote: Boolean) = viewModelScope.launch {
         mutableLiveDataCharacters.value = Event(Data(responseType = Status.LOADING))
-        when (val result = withContext(IO) { getAllCharacters.getCharacters() }) {
+        when (val result = withContext(IO) { getAllCharacters.getCharacters(fromRemote) }) {
             is Result.Success<List<MarvelCharacter>> -> {
                 if (result.data.isNotEmpty()) {
                     mutableLiveDataCharacters.postValue(Event(Data(responseType = Status.SUCCESSFUL, data = result.data)))
