@@ -10,9 +10,10 @@
     <color name="smalt_blue_layout_background_tint_main_activity">#8051808F</color>
     <color name="cod_gray_get_button_main_activity">#70131313</color>
     <color name="gulf_blue_title_text_style">#051657</color>
-    <color name="glacier_body_text_style_main_activity">#7DB1C5</color>
+    <color name="glacier_body_text_style_main_activity">#6CA6BC</color>
     <color name="black_title_text_style_background">#50ffffff</color>
     <color name="gulf_blue_background_color_item_character">#70051657</color>
     <color name="smalt_blue_character_info_dialog_fragment_background">#8051808F</color>
     <color name="glacier_button_background_color">#7DB1C5</color>
+    <color name="gulf_blue_floating_action_button_background">#051657</color>
 </resources>
