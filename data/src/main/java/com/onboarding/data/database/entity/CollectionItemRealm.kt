@@ -1,6 +1,6 @@
 package com.onboarding.data.database.entity
 
-import com.onboarding.data.utils.ConstantUtil
+import com.onboarding.data.util.ConstantUtil
 import io.realm.RealmObject
 
 open class CollectionItemRealm(

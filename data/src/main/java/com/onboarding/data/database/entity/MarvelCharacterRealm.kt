@@ -1,7 +1,7 @@
 package com.onboarding.data.database.entity
 
-import com.onboarding.data.utils.ConstantUtil.DEFAULT_INT_VALUE
-import com.onboarding.data.utils.ConstantUtil.DEFAULT_STRING_VALUE
+import com.onboarding.data.util.ConstantUtil.DEFAULT_INT_VALUE
+import com.onboarding.data.util.ConstantUtil.DEFAULT_STRING_VALUE
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
