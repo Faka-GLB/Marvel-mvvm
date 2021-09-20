@@ -8,10 +8,12 @@ import com.onboarding.domain.usecase.MarvelDatabase
 import io.realm.Realm
 
 class CharacterDatabase : MarvelDatabase {
-    override fun createOrUpdateCharacter(character: MarvelCharacter) {
+    override fun createOrUpdateCharacters(characters: List<MarvelCharacter>) {
         Realm.getDefaultInstance().use {
             it.executeTransaction { realm ->
-                realm.insertOrUpdate(character.transformToRealm())
+                characters.forEach { marvelCharacter ->
+                    realm.insertOrUpdate(marvelCharacter.transformToRealm())
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ fun BaseResponse.transform() = Base(
     this.status,
     this.copyRight,
     this.attributionText,
-    this.asttributionHTML,
+    this.attributionHTML,
     this.etag,
     this.data.transform()
 )

@@ -1,7 +1,7 @@
 package com.onboarding.data.service.response
 
 import com.google.gson.annotations.SerializedName
-import com.onboarding.data.utils.ConstantUtil
+import com.onboarding.data.util.ConstantUtil
 
 data class ThumbnailResponse (
     @SerializedName("path")

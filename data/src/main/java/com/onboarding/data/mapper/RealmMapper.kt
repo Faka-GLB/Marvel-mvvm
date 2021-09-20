@@ -5,7 +5,7 @@ import com.onboarding.data.database.entity.MarvelCharacterRealm
 import com.onboarding.data.database.entity.MarvelCollectionRealm
 import com.onboarding.data.database.entity.ThumbnailRealm
 import com.onboarding.data.database.entity.UrlsRealm
-import com.onboarding.data.utils.ConstantUtil
+import com.onboarding.data.util.ConstantUtil
 import com.onboarding.domain.entity.CollectionItem
 import com.onboarding.domain.entity.MarvelCharacter
 import com.onboarding.domain.entity.MarvelCollection

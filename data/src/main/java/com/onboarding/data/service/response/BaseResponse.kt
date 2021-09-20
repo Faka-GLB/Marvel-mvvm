@@ -1,7 +1,7 @@
 package com.onboarding.data.service.response
 
 import com.google.gson.annotations.SerializedName
-import com.onboarding.data.utils.ConstantUtil
+import com.onboarding.data.util.ConstantUtil
 
 data class BaseResponse (
     @SerializedName("code")
@@ -17,7 +17,7 @@ data class BaseResponse (
     val attributionText: String = ConstantUtil.DEFAULT_STRING_VALUE,
 
     @SerializedName("attributionHTML")
-    val asttributionHTML: String = ConstantUtil.DEFAULT_STRING_VALUE,
+    val attributionHTML: String = ConstantUtil.DEFAULT_STRING_VALUE,
 
     @SerializedName("etag")
     val etag: String = ConstantUtil.DEFAULT_STRING_VALUE,
