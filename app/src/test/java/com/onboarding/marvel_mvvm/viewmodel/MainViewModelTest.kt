@@ -92,7 +92,7 @@ class MainViewModelTest : ViewModelTest() {
         whenever(baseMock.marvelData).thenReturn(marvelDataMock)
         whenever(marvelDataMock.character).thenReturn(emptyList)
         runBlocking {
-            viewModel.getCharacters(true)
+            viewModel.getCharacters(true).join()
         }
         verify(marvelRepository).getCharacterInfo()
         assertEquals(responseList[FIRST_STATUS].responseType, liveData.observedValues[FIRST_STATUS]?.peekContent()?.responseType)
